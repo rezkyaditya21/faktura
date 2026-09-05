@@ -1,0 +1,18 @@
+[package]
+name = "omnitools_pro"
+version = "1.0.0"
+edition = "2021"
+authors = ["Rezky <user@local>"]
+description = "High-performance utility suite and business tools engine powered by Rust"
+
+[dependencies]
+axum = "0.7"
+tokio = { version = "1", features = ["full"] }
+tower-http = { version = "0.5", features = ["fs", "cors", "trace"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha2 = "0.10"
+md-5 = "0.10"
+qrcode = "0.14"
+image = { version = "0.25", default-features = false, features = ["png"] }
+chrono = { version = "0.4", features = ["serde"] }

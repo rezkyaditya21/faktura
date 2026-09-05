@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tentang Kami & Kontak - Faktura</title>
+  <meta name="description" content="Profil pengembang Faktura - Studio Dokumen Bisnis, Faktur, Kwitansi, dan Finansial Cerdas berkecepatan tinggi bertenaga Rust.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .legal-content {
+      max-width: 860px;
+      margin: 40px auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+    .legal-content h1 {
+      font-size: 2rem;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .legal-content h2 {
+      font-size: 1.3rem;
+      color: var(--text-primary);
+      margin-top: 32px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+    }
+    .legal-content p, .legal-content ul {
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+    .legal-content ul {
+      padding-left: 24px;
+    }
+    .legal-content li {
+      margin-bottom: 8px;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .back-btn:hover {
+      text-decoration: underline;
+    }
+    .feature-badge-box {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .feature-item {
+      background: var(--bg-card-hover);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+    .feature-item h3 {
+      font-size: 1.05rem;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .contact-card {
+      background: rgba(37, 211, 102, 0.08);
+      border: 1px solid rgba(37, 211, 102, 0.3);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="index.html" class="brand" style="text-decoration: none;">
+        <div class="brand-icon">📑</div>
+        <div>
+          <div class="brand-title">Faktura</div>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a href="index.html" class="btn btn-outline">← Kembali ke Aplikasi</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="container">
+    <div class="legal-content">
+      <a href="index.html" class="back-btn">← Kembali ke Beranda Faktura</a>
+      <h1>Tentang Kami (About Faktura)</h1>
+      <p style="font-size: 1.05rem; color: var(--text-primary); font-weight: 500;">
+        Faktura adalah studio utilitas dokumen bisnis & finansial modern yang dirancang khusus untuk mempermudah operasional jutaan pelaku UMKM, toko online, pebisnis, dan pekerja lepas di Indonesia.
+      </p>
+
+      <h2>Misi Kami</h2>
+      <p>
+        Banyak pelaku usaha di Indonesia masih kesulitan membuat faktur penjualan atau kwitansi resmi yang rapi tanpa harus berlangganan software akuntansi yang mahal atau rumit. 
+        Misi Faktura adalah menghadirkan <strong>alat pembuatan dokumen bisnis yang 100% gratis, super cepat, tanpa ribet, dan aman tanpa risiko kebocoran data.</strong>
+      </p>
+
+      <div class="feature-badge-box">
+        <div class="feature-item">
+          <h3>⚡ Kecepatan Maksimal</h3>
+          <p style="font-size: 0.88rem;">Didukung arsitektur Rust mutakhir untuk latensi sub-milidetik dan kinerja tanpa tanding.</p>
+        </div>
+        <div class="feature-item">
+          <h3>🔒 Privasi Tanpa Database</h3>
+          <p style="font-size: 0.88rem;">Data faktur dan keuangan Anda diproses secara lokal di browser Anda sendiri. Kami tidak menyimpan data Anda.</p>
+        </div>
+        <div class="feature-item">
+          <h3>🇮🇩 Standar Bisnis Indonesia</h3>
+          <p style="font-size: 0.88rem;">Dilengkapi konverter terbilang otomatis Bahasa Indonesia, format mata uang Rupiah, dan perhitungan Pajak UMKM PP 23.</p>
+        </div>
+      </div>
+
+      <h2>Hubungi Kami & Kerja Sama Bisnis</h2>
+      <p>
+        Kami selalu terbuka untuk kritik, saran pengembangan fitur baru, kerja sama promosi, pemasangan iklan sponsor, atau pembuatan integrasi software khusus untuk perusahaan Anda.
+      </p>
+
+      <div class="contact-card">
+        <h3 style="color: #25d366; margin-bottom: 8px; font-size: 1.15rem;">💬 Layanan WhatsApp Resmi Pengembang:</h3>
+        <p style="margin-bottom: 12px; font-size: 0.95rem;">
+          Hubungi kami langsung untuk kebutuhan kerja sama periklanan, sponsor resmi, atau masukan teknis:
+        </p>
+        <a href="https://wa.me/6288994047510?text=Halo%20Admin%20Faktura,%20saya%20tertarik%20untuk%20bekerja%20sama" target="_blank" rel="noopener noreferrer" class="btn" style="background: #25d366; color: white; font-weight: 700; padding: 12px 24px; border: none; display: inline-flex; align-items: center; gap: 8px;">
+          <span>💬</span> Chat WhatsApp: 0889-9404-7510
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" style="border-top: 1px solid var(--border-color); padding: 30px 0; margin-top: 40px; background: var(--bg-card);">
+    <div class="container" style="text-align: center; font-size: 0.85rem; color: var(--text-muted);">
+      © 2026 Faktura. Seluruh hak cipta dilindungi undang-undang. • <a href="privacy.html" style="color: var(--text-secondary);">Kebijakan Privasi</a> • <a href="terms.html" style="color: var(--text-secondary);">Syarat Layanan</a>
+    </div>
+  </footer>
+
+</body>
+</html>

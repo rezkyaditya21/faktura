@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faktura - Studio Faktur, Kwitansi & Finansial Cerdas</title>
+  <meta name="description" content="Faktura: Studio dokumen bisnis & finansial cerdas. Buat faktur profesional, kwitansi tanda terima, dan surat jalan instan cetak PDF dengan tanda tangan digital dan kalkulator finansial.">
+  <meta name="keywords" content="faktura, invoice generator gratis, kwitansi online, tanda terima pdf, kalkulator kpr, kalkulator pajak umkm, surat jalan">
+  <meta name="author" content="Faktura">
+
+  <!-- OpenGraph Meta -->
+  <meta property="og:title" content="Faktura - Studio Dokumen Bisnis & Finansial Cerdas">
+  <meta property="og:description" content="Buat faktur profesional, kwitansi resmi, dan surat jalan siap cetak PDF dengan kecepatan kilat.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://faktura.id">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Schema.org JSON-LD for Google Rich Results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Faktura",
+    "operatingSystem": "All",
+    "applicationCategory": "BusinessApplication",
+    "description": "Studio faktur, kwitansi online resmi, surat jalan, simulasi KPR, dan kalkulator pajak.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "IDR"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <div class="brand" onclick="switchTab('invoice')">
+        <div class="brand-icon">📑</div>
+        <div>
+          <div class="brand-title">
+            Faktura
+            <span class="rust-badge">High Speed</span>
+            <span id="proStatusBadge" class="pro-badge" style="display: none;">PRO ACTIVE</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <button id="themeToggleBtn" class="theme-toggle" title="Ganti Tema (Dark/Light)" aria-label="Toggle Theme">
+          🌙
+        </button>
+        <button class="btn btn-outline" onclick="openProModal()">
+          ⭐ Upgrade Pro
+        </button>
+        <button class="btn btn-coffee" onclick="openDonateModal()">
+          ☕ Traktir Kopi
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="container">
+
+    <!-- Top AdSense / Sponsored Banner Slot (Hidden by default) -->
+    <div class="ad-slot-wrapper" id="topAdWrapper" style="display: none;">
+      <div id="topAdContainer" class="ad-container">
+        <span class="ad-label">Sponsor / Iklan</span>
+        <a id="topAdLink" href="https://hostinger.co.id" target="_blank" rel="noopener noreferrer" class="ad-banner-demo">
+          <div class="ad-banner-info">
+            <span class="ad-banner-icon">🚀</span>
+            <div>
+              <div class="ad-banner-title" id="topAdTitle">Hostinger Cloud Hosting - Diskon hingga 75% + Domain Gratis!</div>
+              <div class="ad-banner-desc" id="topAdDesc">Onlinekan bisnismu sekarang dengan kecepatan website maksimal dan SSL gratis selamanya.</div>
+            </div>
+          </div>
+          <span class="ad-cta">Klaim Promo →</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-pill">
+        <span class="hero-pill-dot"></span>
+        <span>Performa Super Cepat • Sub-millisecond Latency • 100% Gratis</span>
+      </div>
+      <h1 class="hero-title">
+        Studio Dokumen Bisnis & Finansial <br>
+        <span class="gradient-text">Presisi Tinggi & Cepat</span>
+      </h1>
+      <p class="hero-subtitle">
+        Buat faktur profesional, kwitansi resmi, dan surat jalan instan siap cetak PDF. Lengkap dengan tanda tangan digital dan kalkulator finansial akurat.
+      </p>
+
+      <!-- Navigation Tabs -->
+      <nav class="tabs-nav" role="tablist">
+        <button class="tab-btn active" onclick="switchTab('invoice')" id="tabBtn-invoice">
+          📄 Faktur & Kwitansi
+        </button>
+        <button class="tab-btn" onclick="switchTab('calculator')" id="tabBtn-calculator">
+          💰 Kalkulator Finansial & Pajak
+        </button>
+        <button class="tab-btn" onclick="switchTab('qrcode')" id="tabBtn-qrcode">
+          ⚡ QR Code & Quick Tools
+        </button>
+      </nav>
+    </section>
+
+    <!-- ==========================================
+         TAB 1: INVOICE & KWITANSI STUDIO
+         ========================================== -->
+    <section id="tab-invoice" class="tool-section active">
+      <div class="invoice-workspace">
+        
+        <!-- Left: Form Controls Panel -->
+        <div class="card invoice-form-panel">
+          <div class="card-header">
+            <h2 class="card-title">✏️ Detail Invoice & Bisnis</h2>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-outline" style="padding: 6px 12px; font-size: 0.8rem;" onclick="resetInvoiceData()">
+                🔄 Reset
+              </button>
+              <button class="btn btn-primary" style="padding: 6px 12px; font-size: 0.8rem;" onclick="loadSampleData()">
+                ✨ Contoh Data
+              </button>
+            </div>
+          </div>
+
+          <!-- Template & Branding Settings -->
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="docTypeSelect">📄 Jenis Dokumen</label>
+              <select id="docTypeSelect" onchange="updateDocType()">
+                <option value="invoice">Invoice / Faktur Tagihan</option>
+                <option value="kwitansi">Kwitansi Tanda Terima Resmi</option>
+                <option value="suratjalan">Surat Jalan / Pengiriman Barang</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="invoiceTheme">Gaya Desain Template</label>
+              <select id="invoiceTheme" onchange="updateInvoiceTheme()">
+                <option value="theme-minimal">Minimalist Modern (Default)</option>
+                <option value="theme-executive">Executive Navy Blue</option>
+                <option value="theme-emerald">Emerald Green (Bisnis)</option>
+                <option value="theme-amber">Warm Amber Gold</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="currencySelect">Mata Uang</label>
+              <select id="currencySelect" onchange="renderInvoice()">
+                <option value="IDR">IDR (Rp - Rupiah)</option>
+                <option value="USD">USD ($ - Dollar)</option>
+                <option value="EUR">EUR (€ - Euro)</option>
+                <option value="SGD">SGD (S$ - Singapore Dollar)</option>
+                <option value="MYR">MYR (RM - Ringgit)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Unggah Logo Usaha (PNG/JPG)</label>
+              <div class="logo-upload-box">
+                <input type="file" id="logoUploadInput" accept="image/*" onchange="handleLogoUpload(event)" style="font-size: 0.8rem; padding: 4px;">
+                <button type="button" class="btn btn-outline" style="padding: 4px 8px; font-size: 0.75rem;" onclick="removeLogo()">Hapus</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Business Info -->
+          <h3 style="font-size: 0.95rem; margin: 16px 0 8px; color: var(--accent-cyan);">🏢 Informasi Bisnis Kamu (Pengirim)</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="senderName">Nama Perusahaan / Bisnis</label>
+              <input type="text" id="senderName" placeholder="PT. Sukses Digital Mandiri" value="Studio Kreatif Nusantara" oninput="renderInvoice()">
+            </div>
+            <div class="form-group">
+              <label for="senderEmail">Email / Kontak</label>
+              <input type="text" id="senderEmail" placeholder="billing@bisnis.com" value="halo@studiokreatif.id" oninput="renderInvoice()">
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label for="senderAddress">Alamat & No. HP</label>
+            <input type="text" id="senderAddress" placeholder="Jl. Sudirman No. 45, Jakarta | 0812-3456-7890" value="Gedung Cyber 2 Lt. 8, Jakarta Selatan | WA: 0812-8899-0011" oninput="renderInvoice()">
+          </div>
+
+          <!-- Client Info -->
+          <h3 style="font-size: 0.95rem; margin: 16px 0 8px; color: var(--primary);">👤 Informasi Klien (Penerima)</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="clientName">Nama Klien / Perusahaan</label>
+              <input type="text" id="clientName" placeholder="Bpk. Budi Santoso / PT. Mitra Abadi" value="PT. Solusi Maju Bersama" oninput="renderInvoice()">
+            </div>
+            <div class="form-group">
+              <label for="clientEmail">Email / Kontak Klien</label>
+              <input type="text" id="clientEmail" placeholder="klien@email.com" value="finance@solusimaju.co.id" oninput="renderInvoice()">
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label for="clientAddress">Alamat Klien</label>
+            <input type="text" id="clientAddress" placeholder="Jl. Gatot Subroto No. 12, Bandung" value="Kawasan Industri MM2100, Cikarang Barat" oninput="renderInvoice()">
+          </div>
+
+          <!-- Metadata -->
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="invoiceNumber">Nomor Dokumen</label>
+              <input type="text" id="invoiceNumber" value="INV-2026/09/001" oninput="renderInvoice()">
+            </div>
+            <div class="form-group">
+              <label for="invoiceDate">Tanggal Terbit</label>
+              <input type="date" id="invoiceDate" oninput="renderInvoice()">
+            </div>
+            <div class="form-group">
+              <label for="dueDate">Jatuh Tempo</label>
+              <input type="date" id="dueDate" oninput="renderInvoice()">
+            </div>
+            <div class="form-group">
+              <label for="invoiceStatus">Status Pembayaran</label>
+              <select id="invoiceStatus" onchange="renderInvoice()">
+                <option value="BELUM DIBAYAR">PENDING (Belum Lunas)</option>
+                <option value="LUNAS">PAID (Lunas)</option>
+                <option value="DRAFT">DRAFT</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Line Items Table -->
+          <h3 style="font-size: 0.95rem; margin: 20px 0 8px; color: var(--text-primary); display: flex; justify-content: space-between; align-items: center;">
+            <span id="itemsTableTitle">📦 Rincian Barang / Jasa</span>
+            <button class="btn btn-outline" style="padding: 4px 10px; font-size: 0.78rem;" onclick="addInvoiceItem()">
+              ➕ Tambah Baris
+            </button>
+          </h3>
+
+          <div style="overflow-x: auto;">
+            <table class="items-table" id="itemsInputTable">
+              <thead>
+                <tr>
+                  <th style="width: 45%;" id="thDescription">Deskripsi</th>
+                  <th style="width: 15%;" id="thQty">Qty</th>
+                  <th style="width: 25%;" id="thPrice">Harga Satuan</th>
+                  <th style="width: 15%;">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="itemsTableBody">
+                <!-- Injected via Javascript -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Tax & Discount -->
+          <div class="form-grid" style="margin-top: 12px;">
+            <div class="form-group">
+              <label for="taxRate">PPN / Pajak (%)</label>
+              <input type="number" id="taxRate" value="11" min="0" max="100" step="0.5" oninput="renderInvoice()">
+            </div>
+            <div class="form-group">
+              <label for="discountAmount">Diskon Tambahan</label>
+              <input type="number" id="discountAmount" value="0" min="0" oninput="renderInvoice()">
+            </div>
+          </div>
+
+          <!-- Payment Notes -->
+          <div class="form-group" style="margin-top: 12px;">
+            <label for="paymentDetails">Info Rekening & Catatan Pembayaran</label>
+            <textarea id="paymentDetails" rows="2" placeholder="Transfer Bank Mandiri: 123-00-9876543-1 a/n Studio Kreatif" oninput="renderInvoice()">Transfer Bank BCA: 880-1234-567 a/n Studio Kreatif Nusantara. Harap sertakan nomor invoice pada berita transfer.</textarea>
+          </div>
+
+          <!-- Signature & Signer -->
+          <h3 style="font-size: 0.95rem; margin: 20px 0 8px; color: var(--accent-cyan);">✍️ Tanda Tangan Digital</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="signerNameInput">Nama Penanda Tangan</label>
+              <input type="text" id="signerNameInput" placeholder="Bpk. Hendra Gunawan" value="Bpk. Hendra Gunawan" oninput="renderInvoice()">
+            </div>
+            <div class="form-group">
+              <label for="signerTitleInput">Jabatan / Posisi</label>
+              <input type="text" id="signerTitleInput" placeholder="Finance Manager" value="Finance & Operations Manager" oninput="renderInvoice()">
+            </div>
+          </div>
+          
+          <div class="form-group" style="margin-top: 6px;">
+            <label>Goreskan Tanda Tangan Anda di Kotak Berikut (Mouse / Layar Sentuh):</label>
+            <div class="sig-pad-wrapper">
+              <canvas id="signatureCanvas" width="320" height="110"></canvas>
+              <div class="sig-tools">
+                <div style="display: flex; gap: 6px; align-items: center; font-size: 0.8rem;">
+                  <span>Tinta:</span>
+                  <button type="button" class="btn btn-outline" style="padding: 2px 8px; font-size: 0.75rem;" onclick="setPenColor('#0f172a')">Hitam</button>
+                  <button type="button" class="btn btn-outline" style="padding: 2px 8px; font-size: 0.75rem; color: #1e40af;" onclick="setPenColor('#1e40af')">Biru Dokumen</button>
+                </div>
+                <button type="button" class="btn btn-outline" style="padding: 2px 8px; font-size: 0.75rem; color: var(--accent-rose);" onclick="clearSignature()">
+                  🗑️ Bersihkan
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Live A4 Sheet Preview & Export Bar -->
+        <div class="invoice-preview-container">
+          <!-- Action Buttons Bar -->
+          <div class="card invoice-actions-bar" style="margin-bottom: 16px; padding: 16px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center;">
+            <div>
+              <span style="font-weight: 700; font-size: 0.95rem;">Pratinjau Langsung</span>
+              <span style="font-size: 0.8rem; color: var(--text-secondary); display: block;">Format siap cetak A4 / PDF</span>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-outline" onclick="copyInvoiceSummary()" title="Salin rincian invoice ke clipboard">
+                📋 Salin Teks
+              </button>
+              <button class="btn btn-primary" onclick="window.print()" style="font-size: 0.95rem; padding: 10px 22px;">
+                🖨️ Cetak / Simpan PDF
+              </button>
+            </div>
+          </div>
+
+          <!-- A4 Paper View -->
+          <div id="invoiceSheet" class="invoice-paper theme-minimal">
+            <div>
+              <!-- Invoice Top Bar -->
+              <div class="invoice-header-row">
+                <div>
+                  <div id="p-logoBox" style="display: none; margin-bottom: 12px;">
+                    <img id="p-logoImg" src="" alt="Logo Usaha" style="max-height: 55px; max-width: 170px; object-fit: contain;">
+                  </div>
+                  <div id="p-senderName" class="preview-title">Studio Kreatif Nusantara</div>
+                  <div id="p-senderEmail" style="color: #64748b; font-size: 0.88rem; margin-top: 2px;">halo@studiokreatif.id</div>
+                  <div id="p-senderAddress" style="color: #64748b; font-size: 0.85rem; max-width: 320px;">Gedung Cyber 2 Lt. 8, Jakarta Selatan</div>
+                </div>
+                <div style="text-align: right;">
+                  <h2 id="p-docTitle" style="font-size: 2rem; color: #0f172a; margin: 0; text-transform: uppercase; letter-spacing: -0.02em;">INVOICE</h2>
+                  <div id="p-invoiceNumber" style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #6366f1; margin-top: 4px;">INV-2026/09/001</div>
+                  <div id="p-statusBadge" style="display: inline-block; margin-top: 6px; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; background: #fee2e2; color: #dc2626;">BELUM DIBAYAR</div>
+                </div>
+              </div>
+
+              <!-- Client & Dates -->
+              <div class="invoice-parties-row">
+                <div>
+                  <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #94a3b8; margin-bottom: 4px;" id="p-clientLabel">Ditujukan Kepada:</div>
+                  <div id="p-clientName" style="font-weight: 700; font-size: 1rem; color: #0f172a;">PT. Solusi Maju Bersama</div>
+                  <div id="p-clientEmail" style="color: #475569;">finance@solusimaju.co.id</div>
+                  <div id="p-clientAddress" style="color: #64748b;">Kawasan Industri MM2100, Cikarang Barat</div>
+                </div>
+                <div style="text-align: right;">
+                  <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #94a3b8; margin-bottom: 4px;">Detail Tanggal:</div>
+                  <div><span style="color: #64748b;">Tanggal:</span> <strong id="p-invoiceDate">04 Sep 2026</strong></div>
+                  <div id="p-dueRow"><span style="color: #64748b;">Jatuh Tempo:</span> <strong id="p-dueDate">18 Sep 2026</strong></div>
+                </div>
+              </div>
+
+              <!-- Items Table -->
+              <table class="invoice-preview-table">
+                <thead>
+                  <tr>
+                    <th style="width: 50%;" id="p-thDesc">Deskripsi</th>
+                    <th style="width: 15%; text-align: center;" id="p-thQty">Jumlah</th>
+                    <th style="width: 15%; text-align: right;" id="p-thPrice">Harga</th>
+                    <th style="width: 20%; text-align: right;" id="p-thTotal">Total</th>
+                  </tr>
+                </thead>
+                <tbody id="p-itemsBody">
+                  <!-- Injected via Javascript -->
+                </tbody>
+              </table>
+
+              <!-- Totals Box -->
+              <div class="invoice-totals-box" id="p-totalsBox">
+                <div class="totals-row">
+                  <span>Subtotal:</span>
+                  <span id="p-subtotal">Rp 0</span>
+                </div>
+                <div class="totals-row" id="p-taxRow">
+                  <span>PPN / Pajak (<span id="p-taxRate">11</span>%):</span>
+                  <span id="p-taxAmount">Rp 0</span>
+                </div>
+                <div class="totals-row" id="p-discountRow" style="display: none;">
+                  <span>Diskon:</span>
+                  <span id="p-discountAmount" style="color: #dc2626;">-Rp 0</span>
+                </div>
+                <div class="totals-row grand-total">
+                  <span id="p-grandTotalLabel">Total Tagihan:</span>
+                  <span id="p-grandTotal">Rp 0</span>
+                </div>
+              </div>
+
+              <!-- Terbilang Banner -->
+              <div id="p-terbilangBox" class="terbilang-banner">
+                <span class="terbilang-label">Terbilang:</span>
+                <span id="p-terbilangText">Sepuluh Juta Lima Ratus Ribu Rupiah</span>
+              </div>
+
+              <!-- Payment Details -->
+              <div id="p-paymentBox" style="background: #f8fafc; border-left: 4px solid #6366f1; padding: 12px 16px; border-radius: 4px; margin-top: 14px;">
+                <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: #475569; margin-bottom: 2px;">Metode Pembayaran:</div>
+                <div id="p-paymentDetails" style="font-size: 0.85rem; color: #1e293b; white-space: pre-line;">Transfer Bank BCA: 880-1234-567 a/n Studio Kreatif Nusantara.</div>
+              </div>
+
+              <!-- Signatures Row -->
+              <div class="invoice-signatures-row">
+                <div class="sig-block">
+                  <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #64748b; margin-bottom: 25px;" id="p-leftSigLabel">Penerima / Klien,</div>
+                  <div class="sig-line"></div>
+                  <div style="font-size: 0.82rem; font-weight: 700; color: #0f172a; margin-top: 4px;" id="p-leftSigName">(....................................)</div>
+                </div>
+                <div class="sig-block">
+                  <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #64748b;" id="p-rightSigLabel">Hormat Kami,</div>
+                  <div id="p-sigContainer" style="min-height: 50px; display: flex; align-items: center; justify-content: center;">
+                    <img id="p-sigImg" class="sig-img-preview" src="" alt="Tanda Tangan" style="display: none;">
+                  </div>
+                  <div class="sig-line"></div>
+                  <div style="font-size: 0.82rem; font-weight: 700; color: #0f172a; margin-top: 4px;" id="p-signerName">Bpk. Hendra Gunawan</div>
+                  <div style="font-size: 0.75rem; color: #64748b;" id="p-signerTitle">Finance & Operations Manager</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Watermark / Footer -->
+            <div id="invoiceWatermark" class="watermark-tag" style="margin-top: 24px;">
+              Dibuat menggunakan <strong>Faktura</strong> • https://faktura.id
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 2: KALKULATOR FINANSIAL & PAJAK
+         ========================================== -->
+    <section id="tab-calculator" class="tool-section">
+      <div class="card" style="max-width: 900px; margin: 0 auto;">
+        
+        <!-- Calculator Subtabs -->
+        <div class="calc-subtabs">
+          <button class="calc-tab-btn active" onclick="switchCalcSubtab('kpr')" id="cbtn-kpr">
+            🏠 Simulasi KPR & Pinjaman
+          </button>
+          <button class="calc-tab-btn" onclick="switchCalcSubtab('pajak')" id="cbtn-pajak">
+            📊 Pajak UMKM & PPh
+          </button>
+          <button class="calc-tab-btn" onclick="switchCalcSubtab('margin')" id="cbtn-margin">
+            📈 Margin & Markup Bisnis
+          </button>
+        </div>
+
+        <!-- Subtab 1: KPR -->
+        <div id="csec-kpr" class="calc-content-panel">
+          <h2 style="font-size: 1.2rem; margin-bottom: 12px;">Simulasi Cicilan KPR & Kredit Bank</h2>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="kprLoan">Jumlah Pinjaman / Plafon KPR (Rp)</label>
+              <input type="number" id="kprLoan" value="500000000" step="5000000" oninput="calcKPR()">
+            </div>
+            <div class="form-group">
+              <label for="kprInterest">Suku Bunga Efektif per Tahun (%)</label>
+              <input type="number" id="kprInterest" value="7.5" step="0.1" oninput="calcKPR()">
+            </div>
+            <div class="form-group">
+              <label for="kprTenure">Jangka Waktu / Tenor (Tahun)</label>
+              <input type="number" id="kprTenure" value="15" min="1" max="30" oninput="calcKPR()">
+            </div>
+          </div>
+
+          <div class="calc-result-box">
+            <div style="font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Estimasi Angsuran Bulanan</div>
+            <div class="calc-result-value" id="kprMonthlyResult">Rp 4.635.000</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">Cicilan tetap per bulan untuk pinjaman Anda</div>
+
+            <div class="calc-details-grid">
+              <div class="calc-detail-card">
+                <div style="font-size: 0.78rem; color: var(--text-muted);">Pokok Pinjaman</div>
+                <strong id="kprPrincipalTotal">Rp 500.000.000</strong>
+              </div>
+              <div class="calc-detail-card">
+                <div style="font-size: 0.78rem; color: var(--text-muted);">Total Bunga Selama Tenor</div>
+                <strong id="kprInterestTotal" style="color: var(--accent-amber);">Rp 334.300.000</strong>
+              </div>
+              <div class="calc-detail-card">
+                <div style="font-size: 0.78rem; color: var(--text-muted);">Total Pembayaran</div>
+                <strong id="kprGrandTotal" style="color: var(--accent-cyan);">Rp 834.300.000</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subtab 2: Pajak UMKM & PPh -->
+        <div id="csec-pajak" class="calc-content-panel" style="display: none;">
+          <h2 style="font-size: 1.2rem; margin-bottom: 12px;">Kalkulator Pajak UMKM (PP 23) & PPh</h2>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="taxRevenue">Total Omzet / Penghasilan Kotor per Tahun (Rp)</label>
+              <input type="number" id="taxRevenue" value="650000000" step="5000000" oninput="calcTax()">
+            </div>
+            <div class="form-group">
+              <label for="taxType">Kategori Wajib Pajak</label>
+              <select id="taxType" onchange="calcTax()">
+                <option value="umkm-op">UMKM Orang Pribadi (Bebas pajak omzet < 500 Juta)</option>
+                <option value="umkm-badan">UMKM Badan / PT / CV (PPh Final 0.5% tanpa batas)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="calc-result-box">
+            <div style="font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Estimasi Pajak Terutang (PPh Final 0.5%)</div>
+            <div class="calc-result-value" id="taxResultValue">Rp 750.000 / thn</div>
+            <div id="taxExplanation" style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+              Omzet terkena pajak: Rp 150.000.000 (setelah dikurangi batas Rp 500 juta)
+            </div>
+
+            <div class="calc-details-grid">
+              <div class="calc-detail-card">
+                <div style="font-size: 0.78rem; color: var(--text-muted);">Pajak Rata-rata per Bulan</div>
+                <strong id="taxMonthlyAvg" style="color: var(--accent-cyan);">Rp 62.500</strong>
+              </div>
+              <div class="calc-detail-card">
+                <div style="font-size: 0.78rem; color: var(--text-muted);">Batas Omzet Bebas Pajak</div>
+                <strong>Rp 500.000.000</strong>
+              </div>
+              <div class="calc-detail-card">
+                <div style="font-size: 0.78rem; color: var(--text-muted);">Tarif Efektif</div>
+                <strong id="taxEffectiveRate">0.11%</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subtab 3: Margin & Markup -->
+        <div id="csec-margin" class="calc-content-panel" style="display: none;">
+          <h2 style="font-size: 1.2rem; margin-bottom: 12px;">Kalkulator Margin & Markup Keuntungan Bisnis</h2>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="marginCost">Harga Modal / HPP Produk (Rp)</label>
+              <input type="number" id="marginCost" value="100000" step="5000" oninput="calcMargin()">
+            </div>
+            <div class="form-group">
+              <label for="marginTarget">Target Margin Keuntungan Kotor (%)</label>
+              <input type="number" id="marginTarget" value="30" min="1" max="99" step="1" oninput="calcMargin()">
+            </div>
+          </div>
+
+          <div class="calc-result-box">
+            <div style="font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Harga Jual yang Disarankan</div>
+            <div class="calc-result-value" id="marginSellingPrice">Rp 142.857</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">Harga optimal untuk mengunci margin target Anda</div>
+
+            <div class="calc-details-grid">
+              <div class="calc-detail-card">
+                <div style="font-size: 0.78rem; color: var(--text-muted);">Keuntungan Bersih / Unit</div>
+                <strong id="marginProfit" style="color: var(--accent-emerald);">Rp 42.857</strong>
+              </div>
+              <div class="calc-detail-card">
+                <div style="font-size: 0.78rem; color: var(--text-muted);">Rasio Markup Harga</div>
+                <strong id="marginMarkupPercent">42.86%</strong>
+              </div>
+              <div class="calc-detail-card">
+                <div style="font-size: 0.78rem; color: var(--text-muted);">Modal Kembali (ROI)</div>
+                <strong id="marginRoi">142.86%</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 3: QR CODE & QUICK TOOLS STUDIO
+         ========================================== -->
+    <section id="tab-qrcode" class="tool-section">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        
+        <!-- Left: QR Code Studio -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">⚡ Generator QR Code Instan</h2>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label for="qrType">Tipe QR Code</label>
+            <select id="qrType" onchange="updateQRForm()">
+              <option value="url">Tautan Website / URL</option>
+              <option value="wa">WhatsApp Direct Chat</option>
+              <option value="wifi">WiFi Network Login</option>
+              <option value="text">Teks Bebas</option>
+            </select>
+          </div>
+
+          <div id="qrInputGroup" class="form-group" style="margin-bottom: 16px;">
+            <label id="qrInputLabel" for="qrInputText">Masukkan URL / Link</label>
+            <input type="text" id="qrInputText" value="https://omnitools.local" placeholder="https://..." oninput="generateQRCode()">
+          </div>
+
+          <!-- Color Customizer -->
+          <div class="form-grid" style="margin-bottom: 16px;">
+            <div class="form-group">
+              <label for="qrFgColor">Warna Kode</label>
+              <input type="color" id="qrFgColor" value="#000000" onchange="generateQRCode()" style="height: 42px; padding: 4px; cursor: pointer;">
+            </div>
+            <div class="form-group">
+              <label for="qrBgColor">Warna Background</label>
+              <input type="color" id="qrBgColor" value="#ffffff" onchange="generateQRCode()" style="height: 42px; padding: 4px; cursor: pointer;">
+            </div>
+          </div>
+
+          <!-- QR Output Display -->
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--bg-input); padding: 24px; border-radius: var(--radius-md); border: 1px dashed var(--border-color);">
+            <div id="qrCanvasContainer" style="background: white; padding: 16px; border-radius: 8px; box-shadow: var(--shadow-sm); display: inline-block;">
+              <canvas id="qrCanvas" width="200" height="200"></canvas>
+            </div>
+            <button class="btn btn-primary" style="margin-top: 16px;" onclick="downloadQRCode()">
+              📥 Unduh Gambar QR Code (PNG)
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Text Tools & Hasher -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">🛠️ Quick Utilities & Security</h2>
+          </div>
+
+          <!-- Case Converter -->
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label for="caseInputText">Text Case Converter</label>
+            <input type="text" id="caseInputText" placeholder="Ketik teks di sini..." value="omni tools pro super fast">
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;">
+              <button class="btn btn-outline" style="padding: 4px 10px; font-size: 0.78rem;" onclick="convertCase('upper')">UPPERCASE</button>
+              <button class="btn btn-outline" style="padding: 4px 10px; font-size: 0.78rem;" onclick="convertCase('lower')">lowercase</button>
+              <button class="btn btn-outline" style="padding: 4px 10px; font-size: 0.78rem;" onclick="convertCase('title')">Title Case</button>
+              <button class="btn btn-outline" style="padding: 4px 10px; font-size: 0.78rem;" onclick="convertCase('camel')">camelCase</button>
+              <button class="btn btn-outline" style="padding: 4px 10px; font-size: 0.78rem;" onclick="convertCase('kebab')">kebab-case</button>
+            </div>
+          </div>
+
+          <!-- Cryptographic Hasher -->
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label for="hashInput">Hash Generator (MD5 & SHA-256)</label>
+            <input type="text" id="hashInput" placeholder="Masukkan teks untuk di-hash..." value="omnitools2026" oninput="generateHashes()">
+            <div style="margin-top: 8px; display: flex; flex-direction: column; gap: 6px;">
+              <div style="background: var(--bg-card); padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; display: flex; justify-content: space-between; align-items: center;">
+                <span id="hashSha256" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 80%;">SHA256: ...</span>
+                <button class="btn btn-outline" style="padding: 2px 8px; font-size: 0.7rem;" onclick="copyText('hashSha256')">Salin</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Password Generator -->
+          <div class="form-group">
+            <label>Password Generator Aman</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="generatedPassword" readonly style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent-emerald);">
+              <button class="btn btn-primary" onclick="createSecurePassword()">🎲 Buat</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         AFFILIATE RECOMMENDATION SHOWCASE (Hidden by default)
+         ========================================== -->
+    <section class="affiliate-section" id="affiliateSection" style="display: none;">
+      <div class="affiliate-header">
+        <h2 style="font-size: 1.5rem; margin-bottom: 6px;">🌟 Rekomendasi Solusi Bisnis & Website Terbaik</h2>
+        <p style="color: var(--text-secondary); font-size: 0.9rem;">
+          Tools pilihan yang kami gunakan untuk mendukung operasional bisnis dan aplikasi online dengan performa tinggi.
+        </p>
+      </div>
+
+      <div class="affiliate-grid" id="affiliateCardsContainer">
+        <!-- Injected dynamically from monetization.json -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer" style="border-top: 1px solid var(--border-color); padding: 40px 0; margin-top: 60px; background: var(--bg-card);">
+    <div class="container" style="display: flex; flex-direction: column; gap: 20px;">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; align-items: center;">
+        <div>
+          <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-primary);">
+            📑 Faktura
+          </div>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">
+            Studio Dokumen & Finansial Cerdas • Berkecepatan tinggi bertenaga Rust.
+          </p>
+        </div>
+        <div style="display: flex; gap: 16px; font-size: 0.85rem; align-items: center;">
+          <a href="#" onclick="openDonateModal(); return false;">☕ Traktir Kopi</a>
+          <a id="footerWaBtn" href="https://wa.me/6288994047510?text=Halo%20Admin%20Faktura,%20saya%20tertarik%20untuk%20bekerja%20sama" target="_blank" rel="noopener noreferrer" style="color: #25d366; font-weight: 600;">💬 Hubungi Kami (WA)</a>
+          <a href="#" onclick="openProModal(); return false;">⭐ Lisensi Pro</a>
+        </div>
+      </div>
+
+      <!-- Legal Compliance Links for Google AdSense -->
+      <div style="border-top: 1px solid var(--border-color); padding-top: 16px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 0.8rem; color: var(--text-muted);">
+        <div>
+          © 2026 Faktura. Seluruh hak cipta dilindungi undang-undang.
+        </div>
+        <div style="display: flex; gap: 16px;">
+          <a href="about.html" style="color: var(--text-secondary);">Tentang Kami</a>
+          <a href="privacy.html" style="color: var(--text-secondary);">Kebijakan Privasi</a>
+          <a href="terms.html" style="color: var(--text-secondary);">Syarat Layanan</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Coffee Button -->
+  <button class="floating-coffee-btn" onclick="openDonateModal()" title="Dukung Pengembang">
+    ☕ <span>Traktir Kopi</span>
+  </button>
+
+  <!-- ==========================================
+       MODALS
+       ========================================== -->
+
+  <!-- Donate Modal -->
+  <div id="donateModal" class="modal-overlay">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('donateModal')">&times;</button>
+      <h3 style="font-size: 1.3rem; margin-bottom: 8px;">☕ Dukung Pengembang</h3>
+      <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 20px;">
+        Aplikasi ini 100% gratis dan tanpa biaya tersembunyi. Jika kamu merasa terbantu, kamu bisa mentraktir segelas kopi untuk mendukung biaya server.
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <a id="donateSaweriaBtn" href="https://saweria.co/rezky8stream" target="_blank" class="btn btn-coffee" style="width: 100%; padding: 14px; font-size: 0.95rem;">
+          💛 Donasi via Saweria (QRIS / GoPay / OVO / Dana)
+        </a>
+        <a id="donateTrakteerBtn" href="https://trakteer.id/9dt8jhh95fifdycl33ah" target="_blank" class="btn btn-outline" style="width: 100%; padding: 14px; font-size: 0.95rem; border-color: #ef4444; color: #ef4444;">
+          ❤️ Dukung via Trakteer.id
+        </a>
+
+        <!-- WhatsApp Partnership Contact -->
+        <div style="border-top: 1px dashed var(--border-color); margin-top: 6px; padding-top: 14px;">
+          <div style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.05em; text-align: center;">
+            🤝 Hubungi untuk Kerja Sama & Bisnis:
+          </div>
+          <a id="donateWaBtn" href="https://wa.me/6288994047510?text=Halo%20Admin%20Faktura,%20saya%20tertarik%20untuk%20bekerja%20sama%20/%20pasang%20iklan" target="_blank" rel="noopener noreferrer" class="btn" style="width: 100%; padding: 12px; font-size: 0.92rem; background: #25d366; color: white; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3); font-weight: 700; border: none; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <span>💬</span> WhatsApp: 0889-9404-7510
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pro License Modal -->
+  <div id="proModal" class="modal-overlay">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('proModal')">&times;</button>
+      <div style="text-align: center; margin-bottom: 16px;">
+        <span style="font-size: 40px;">👑</span>
+        <h3 style="font-size: 1.3rem; margin-top: 6px;">Upgrade ke Faktura Pro</h3>
+        <p style="color: var(--text-secondary); font-size: 0.86rem;">
+          Bebas watermark pada invoice & kwitansi, akses semua template premium, dan ekspor tanpa batasan.
+        </p>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 16px;">
+        <label for="licenseKeyInput">Masukkan Kunci Lisensi Kamu:</label>
+        <input type="text" id="licenseKeyInput" placeholder="Contoh: FAKTURAPRO" style="text-transform: uppercase; font-family: 'JetBrains Mono', monospace; font-weight: 700; text-align: center; font-size: 1.1rem;">
+      </div>
+
+      <button class="btn btn-primary" style="width: 100%; padding: 12px;" onclick="activateLicenseKey()">
+        🚀 Verifikasi & Aktifkan Pro
+      </button>
+
+      <div style="margin-top: 14px; text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+        Belum punya lisensi? <em>(Gunakan kode demo: <code>PRO2026</code> atau <code>FAKTURAPRO</code>)</em>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/monetization.js"></script>
+  <script src="js/invoice.js"></script>
+  <script src="js/calculators.js"></script>
+  <script src="js/qrcode.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

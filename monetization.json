@@ -1,0 +1,45 @@
+{
+  "site_name": "Faktura",
+  "tagline": "Studio Dokumen Bisnis & Finansial Cerdas",
+  "adsense": {
+    "enabled": false,
+    "client_id": "ca-pub-XXXXXXXXXXXXXXXX",
+    "header_slot": "1234567890",
+    "incontent_slot": "2345678901",
+    "sidebar_slot": "3456789012"
+  },
+  "affiliates_enabled": false,
+  "donations": {
+    "saweria_url": "https://saweria.co/rezky8stream",
+    "trakteer_url": "https://trakteer.id/9dt8jhh95fifdycl33ah",
+    "contact_wa": "6288994047510"
+  },
+  "affiliates": [
+    {
+      "name": "Cloud Hosting & Domain Kilat",
+      "badge": "Diskon 75% OFF",
+      "description": "Hosting berkecepatan tinggi untuk website & aplikasi bisnismu dengan uptime 99.9% dan domain gratis.",
+      "url": "https://hostinger.co.id/?ref=affiliate_anda",
+      "icon": "⚡"
+    },
+    {
+      "name": "Payment Gateway Otomatis (QRIS)",
+      "badge": "Terpercaya",
+      "description": "Terima pembayaran QRIS, Virtual Account, & e-Wallet otomatis untuk tokomu.",
+      "url": "https://midtrans.com/?ref=affiliate_anda",
+      "icon": "💳"
+    },
+    {
+      "name": "Canva Pro Desain & Bisnis",
+      "badge": "Paling Populer",
+      "description": "Bikin banner promosi, logo perusahaan, dan desain media sosial dalam hitungan detik.",
+      "url": "https://canva.com/?ref=affiliate_anda",
+      "icon": "🎨"
+    }
+  ],
+  "pro_keys": [
+    "PRO2026",
+    "FAKTURAPRO",
+    "VIPMEMBER"
+  ]
+}
